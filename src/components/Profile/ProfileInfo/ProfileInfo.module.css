@@ -1,0 +1,13 @@
+.cover img {
+    width: 100%;
+    height: 100px;
+}
+
+.description {
+    padding: 20px;
+}
+
+.description img {
+    width: 60px;
+    height: 60px;
+}
