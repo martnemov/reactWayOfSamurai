@@ -13,6 +13,13 @@
 }
 
 .companion {
+    text-decoration: none;
+    color: white;
+}
+
+.companionActive{
+    text-decoration: none;
+    color: red;
 }
 
 .message {

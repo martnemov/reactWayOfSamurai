@@ -4,7 +4,9 @@ import {NavLink} from "react-router-dom";
 
 const Companions = (props) => {
     return <div className={style.companion}>
-        <NavLink to={'/dialogs/' + props.id}>{props.name}</NavLink>
+        <NavLink to={"/dialogs/" + props.id}
+                 className={navData => navData.isActive ? style.companionActive : style.companion}>
+            {props.name}</NavLink>
     </div>
 }
 
@@ -13,36 +15,25 @@ const Message = (props) => {
 }
 
 const Dialogs = () => {
-    let companionsData = [
-        {id: 1, name: 'Alex'},
-        {id: 2, name: 'Bob'},
-        {id: 3, name: 'John'},
-        {id: 4, name: 'Sara'},
-    ]
+    let companionsData = [{id: 1, name: 'Alex'}, {id: 2, name: 'Bob'}, {id: 3, name: 'John'}, {id: 4, name: 'Sara'},]
 
-    let messagesData = [
-        {id: 1, message: 'Hello!'},
-        {id: 2, message: 'Sorry for a late'},
-        {id: 3, message: 'Bye-bye'},
-        {id: 4, message: 'For what!?'},
-    ]
-    return (
-        <div className={style.dialogs}>
+    let messagesData = [{id: 1, text: 'Hello!'}, {id: 2, text: 'Sorry for a late'}, {id: 3, text: 'Bye-bye'}, {
+        id: 4,
+        text: 'For what!?'
+    },]
+
+    let companionsElements = companionsData.map(companion => <Companions id={companion.id} name={companion.name}/>)
+
+    let messagesElements = messagesData.map(message => <Message id={message.id} message={message.text}/>)
+
+    return (<div className={style.dialogs}>
             <div className={style.companions}>
-                <Companions/>
-                <Companions id={companionsData[0].id} name={companionsData[0].name}/>
-                <Companions id={companionsData[1].id} name={companionsData[1].name}/>
-                <Companions id={companionsData[2].id} name={companionsData[2].name}/>
-                <Companions id={companionsData[3].id} name={companionsData[3].name}/>
+                {companionsElements}
             </div>
             <div className={style.messages}>
-                <Message id={messagesData[0].id} message={messagesData[0].message}/>
-                <Message id={messagesData[1].id} message={messagesData[1].message}/>
-                <Message id={messagesData[2].id} message={messagesData[2].message}/>
-                <Message id={messagesData[3].id} message={messagesData[3].message}/>
+                {messagesElements}
             </div>
-        </div>
-    )
+        </div>)
 }
 
 export default Dialogs;
