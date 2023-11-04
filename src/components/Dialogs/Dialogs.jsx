@@ -4,6 +4,7 @@ import {NavLink} from "react-router-dom";
 
 const Companions = (props) => {
     return <div className={style.companion}>
+        <img src={props.src} alt="avatar"/>
         <NavLink to={"/dialogs/" + props.id}
                  className={navData => navData.isActive ? style.companionActive : style.companion}>
             {props.name}</NavLink>
@@ -11,12 +12,14 @@ const Companions = (props) => {
 }
 
 const Message = (props) => {
-    return <div className={style.message}>{props.message}</div>
+    return <div>{props.message}</div>
 }
 
 const Dialogs = (props) => {
-    let companionsElements = props.companionsData.map(companion => <Companions id={companion.id} name={companion.name}/>)
-    let messagesElements = props.messagesData.map(message => <Message id={message.id} message={message.text}/>)
+    let companionsElements = props.state.companionsData.map(companion => <Companions id={companion.id}
+                                                                                     name={companion.name} src={companion.src}/>)
+    let messagesElements = props.state.messagesData.map(message => <Message id={message.id} message={message.text}/>)
+
 
     return (<div className={style.dialogs}>
         <div className={style.companions}>

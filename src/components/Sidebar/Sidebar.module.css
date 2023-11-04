@@ -1,0 +1,10 @@
+.sidebar {
+    grid-area: s;
+    background-color: darkslateblue;
+    padding: 20px;
+}
+
+.sidebar img {
+    width: 20px;
+    height: 20px;
+}
