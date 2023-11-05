@@ -12,8 +12,8 @@ const Friend = (props) => {
 }
 
 const Sidebar = (props) => {
-    let friendsElements = props.state.companionsData.map(companion => <Friend name={companion.name} src={companion.src}/>);
-
+    let friendsElements = props.state.companionsData.map(companion => <Friend name={companion.name}
+                                                                              src={companion.src}/>);
 
     return (
         <div className={style.sidebar}>
