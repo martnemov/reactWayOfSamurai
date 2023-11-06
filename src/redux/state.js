@@ -1,4 +1,4 @@
-import {renderEntireThree} from "../render";
+let renderEntireTree;
 
 let state =
     {
@@ -7,7 +7,8 @@ let state =
                 postsData: [
                     {id: 1, message: 'Hello, world!', likes: 12},
                     {id: 2, message: 'My first post', likes: 22}
-                ]
+                ],
+                newPostText: 'insert text'
             },
         dialogsPage:
             {
@@ -42,15 +43,23 @@ let state =
             },
     }
 
-export let addPost = (text) => {
+export const addPost = () => {
     let newPost = {
         id: 3,
-        message: text,
+        message: state.profilePage.newPostText,
         likes: 0,
     }
     state.profilePage.postsData.push(newPost);
-    renderEntireThree(state)
-
+    state.profilePage.newPostText = '';
+    renderEntireTree(state);
 }
 
+export const updatePostText = (newText) => {
+    state.profilePage.newPostText = newText;
+    renderEntireTree(state);
+}
+
+export const subscribe = (observer) => {
+    renderEntireTree = observer;
+}
 export default state
