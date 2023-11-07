@@ -1,7 +1,5 @@
-let renderEntireTree;
-
-let state =
-    {
+let store = {
+    _state: {
         profilePage:
             {
                 postsData: [
@@ -41,25 +39,26 @@ let state =
                     {id: 4, text: 'For what!?'},
                 ],
             },
+    },
+    addPost() {
+        let newPost = {
+            id: 3,
+            message: this._state.profilePage.newPostText,
+            likes: 0,
+        }
+        this._state.profilePage.postsData.push(newPost);
+        this._state.profilePage.newPostText = '';
+        this.renderEntireTree(this._state);
+    },
+    updatePostText(newText) {
+        this._state.profilePage.newPostText = newText;
+        this.renderEntireTree(this._state);
+    },
+    renderEntireTree() {
+        console.log('Nothing to render')
+    },
+    subscribe(observer) {
+        this.renderEntireTree = observer;
     }
-
-export const addPost = () => {
-    let newPost = {
-        id: 3,
-        message: state.profilePage.newPostText,
-        likes: 0,
-    }
-    state.profilePage.postsData.push(newPost);
-    state.profilePage.newPostText = '';
-    renderEntireTree(state);
 }
-
-export const updatePostText = (newText) => {
-    state.profilePage.newPostText = newText;
-    renderEntireTree(state);
-}
-
-export const subscribe = (observer) => {
-    renderEntireTree = observer;
-}
-export default state
+export default store;

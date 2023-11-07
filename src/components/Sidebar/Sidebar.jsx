@@ -12,7 +12,7 @@ const Friend = (props) => {
 }
 
 const Sidebar = (props) => {
-    let friendsElements = props.state.companionsData.map(companion => <Friend name={companion.name}
+    let friendsElements = props.dialogsPage.companionsData.map(companion => <Friend name={companion.name}
                                                                               src={companion.src}/>);
 
     return (
