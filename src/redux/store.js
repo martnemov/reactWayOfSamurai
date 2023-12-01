@@ -1,7 +1,5 @@
-const ADD_POST = 'ADD-POST';
-const UPDATE_POST_TEXT = 'UPDATE-POST-TEXT';
-const UPDATE_NEW_MESSAGE_BODY = 'UPDATE_NEW_MESSAGE_BODY';
-const SEND_MESSAGE = 'SEND_MESSAGE';
+import profileReducer from "./profile-reducer";
+import dialogsReducer from "./dialogs-reducer";
 
 let store = {
     _state: {
@@ -46,42 +44,19 @@ let store = {
                 newMessageBody: 'add your message'
             },
     },
-    dispatch(action) {
-        if (action.type === ADD_POST) {
-            let newPost = {
-                id: 3,
-                message: this._state.profilePage.newPostText,
-                likes: 0,
-            }
-            this._state.profilePage.postsData.push(newPost);
-            this._state.profilePage.newPostText = '';
-            this._callSubscriber(this._state);
-        } else if (action.type === UPDATE_POST_TEXT) {
-            this._state.profilePage.newPostText = action.newText;
-            this._callSubscriber(this._state);
-        } else if (action.type === UPDATE_NEW_MESSAGE_BODY) {
-            this._state.dialogsPage.newMessageBody = action.body;
-            this._callSubscriber(this._state);
-        } else if (action.type === SEND_MESSAGE) {
-            let body = this._state.dialogsPage.newMessageBody;
-            this._state.dialogsPage.newMessageBody = '';
-            this._state.dialogsPage.messagesData.push({id: 6, text: body});
-            this._callSubscriber(this._state);
-        }
-    },
     _callSubscriber() {
         console.log('Nothing to render')
     },
     subscribe(observer) {
         this._callSubscriber = observer;
-    }
+    },
+    dispatch(action) {
+        this._state.profilePage = profileReducer(action, this._state.profilePage);
+        this._state.dialogsPage = dialogsReducer(action, this._state.dialogsPage);
+
+        this._callSubscriber(this._state)
+    },
 }
-
-export const updatePostActionCreator = (text) => ({type: UPDATE_POST_TEXT, newText: text})
-export const addPostActionCreator = () => ({type: ADD_POST})
-export const sendMessageCreator = () => ({type: SEND_MESSAGE})
-export const updateNewMessageBodyCreator = (body) => ({type: UPDATE_NEW_MESSAGE_BODY, body: body})
-
 
 export default store;
 window.store = store;

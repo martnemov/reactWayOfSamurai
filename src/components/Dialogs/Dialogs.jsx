@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './Dialogs.module.css'
 import {NavLink} from "react-router-dom";
-import {sendMessageCreator, updateNewMessageBodyCreator} from "../../redux/store";
+import {sendMessageCreator, updateNewMessageBodyCreator} from "../../redux/dialogs-reducer";
 
 const Companions = (props) => {
     return <div className={style.companion}>
@@ -21,13 +21,14 @@ const Dialogs = (props) => {
     let newMessageBody = props.state.newMessageBody
 
     let companionsElements = props.state.companionsData.map(companion => <Companions id={companion.id}
-                                                                                     name={companion.name} src={companion.src}/>)
+                                                                                     name={companion.name}
+                                                                                     src={companion.src}/>)
     let messagesElements = props.state.messagesData.map(message => <Message id={message.id} message={message.text}/>)
     let onSendMessageClick = () => {
         props.store.dispatch(sendMessageCreator())
     }
-    let onChangeMessageBody= () => {
-        let body = newTextMessageElement.current.value;
+    let onChangeMessageBody = (e) => {
+        let body = e.target.value;
         props.store.dispatch(updateNewMessageBodyCreator(body))
     }
     return (<div className={style.dialogs}>
@@ -43,11 +44,12 @@ const Dialogs = (props) => {
                     id='message-text'
                     ref={newTextMessageElement}
                     value={newMessageBody}
-                    onChange={onChangeMessageBody}></textarea>
+                    onChange={(e) => onChangeMessageBody(e)}></textarea>
             </div>
             <div>
                 <button
-                    onClick={onSendMessageClick}>Send</button>
+                    onClick={onSendMessageClick}>Send
+                </button>
             </div>
         </div>
     </div>)
