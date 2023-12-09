@@ -1,7 +1,6 @@
 import React from 'react';
 import style from './Dialogs.module.css'
 import {NavLink} from "react-router-dom";
-import {sendMessageCreator, updateNewMessageBodyCreator} from "../../redux/dialogs-reducer";
 
 const Companions = (props) => {
     return <div className={style.companion}>
@@ -13,23 +12,21 @@ const Companions = (props) => {
 }
 
 const Message = (props) => {
-    return <div>{props.message}</div>
+    return <div>{props.text}</div>
 }
 
 const Dialogs = (props) => {
-    let newTextMessageElement = React.createRef()
-    let newMessageBody = props.state.newMessageBody
-
-    let companionsElements = props.state.companionsData.map(companion => <Companions id={companion.id}
-                                                                                     name={companion.name}
-                                                                                     src={companion.src}/>)
-    let messagesElements = props.state.messagesData.map(message => <Message id={message.id} message={message.text}/>)
+    let companionsElements = props.companionsData.map(companion => <Companions id={companion.id}
+                                                                               name={companion.name}
+                                                                               src={companion.src}/>)
+    let messagesElements = props.messagesData.map(message => <Message id={message.id}
+                                                                      text={message.text}/>)
     let onSendMessageClick = () => {
-        props.store.dispatch(sendMessageCreator())
+        props.sendMessage()
     }
     let onChangeMessageBody = (e) => {
         let body = e.target.value;
-        props.store.dispatch(updateNewMessageBodyCreator(body))
+        props.changeMessage(body)
     }
     return (<div className={style.dialogs}>
         <div className={style.companions}>
@@ -42,8 +39,7 @@ const Dialogs = (props) => {
             <div>
                 <textarea
                     id='message-text'
-                    ref={newTextMessageElement}
-                    value={newMessageBody}
+                    value={props.newMessageBody}
                     onChange={(e) => onChangeMessageBody(e)}></textarea>
             </div>
             <div>
