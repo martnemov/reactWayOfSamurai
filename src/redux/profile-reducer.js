@@ -22,7 +22,7 @@ const
                 state.newPostText = '';
                 return state
 
-            case(UPDATE_POST_TEXT):
+            case UPDATE_POST_TEXT:
                 state.newPostText = action.newText;
                 return state
 
