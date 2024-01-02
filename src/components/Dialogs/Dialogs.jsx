@@ -16,10 +16,10 @@ const Message = (props) => {
 }
 
 const Dialogs = (props) => {
-    let companionsElements = props.companionsData.map(companion => <Companions id={companion.id}
+    let companionsElements = props.dialogsPage.companionsData.map(companion => <Companions id={companion.id}
                                                                                name={companion.name}
                                                                                src={companion.src}/>)
-    let messagesElements = props.messagesData.map(message => <Message id={message.id}
+    let messagesElements = props.dialogsPage.messagesData.map(message => <Message id={message.id}
                                                                       text={message.text}/>)
     let onSendMessageClick = () => {
         props.sendMessage()
@@ -39,7 +39,7 @@ const Dialogs = (props) => {
             <div>
                 <textarea
                     id='message-text'
-                    value={props.newMessageBody}
+                    value={props.dialogsPage.newMessageBody}
                     onChange={(e) => onChangeMessageBody(e)}></textarea>
             </div>
             <div>

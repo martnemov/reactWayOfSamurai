@@ -3,14 +3,15 @@ import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
 
 
-let mapState = (state) => {
+const mapStateToProps = (state) => {
     return {
-        postData: state.profilePage.postsData,
+        postsData: state.profilePage.postsData,
         newPostText: state.profilePage.newPostText
     }
 }
 
-let mapDispatch = (dispatch) => {
+
+const mapDispatchToProps = (dispatch) => {
     return {
         addPost: () => {
             dispatch(addPostActionCreator())
@@ -21,6 +22,6 @@ let mapDispatch = (dispatch) => {
     }
 }
 
-const MyPostsContainer = connect(mapState, mapDispatch)(MyPosts)
+const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts);
 
 export default MyPostsContainer;

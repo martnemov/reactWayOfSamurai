@@ -1,7 +1,7 @@
 import Sidebar from "./Sidebar";
 import {connect} from "react-redux";
 
-let mapState = (state) => {
+const mapState = (state) => {
     return {
         companionsData: state.dialogsPage.companionsData
     }

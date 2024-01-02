@@ -10,13 +10,14 @@ import {Route, Routes} from "react-router-dom";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import SidebarContainer from "./components/Sidebar/SidebarContainer";
 
-const App = (props) => {
+const App = () => {
     return (
         <div className='app-wrapper'>
             <Header/>
             <Navbar/>
             <SidebarContainer/>
             <Routes>
+                <Route path='/' element={<Profile/>}/>
                 <Route path='/profile' element={<Profile/>}/>
                 <Route path='/dialogs' element={<DialogsContainer/>}/>
                 <Route path='/news' element={<News/>}/>
