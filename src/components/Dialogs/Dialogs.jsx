@@ -16,11 +16,15 @@ const Message = (props) => {
 }
 
 const Dialogs = (props) => {
-    let companionsElements = props.dialogsPage.companionsData.map(companion => <Companions id={companion.id}
-                                                                               name={companion.name}
-                                                                               src={companion.src}/>)
-    let messagesElements = props.dialogsPage.messagesData.map(message => <Message id={message.id}
-                                                                      text={message.text}/>)
+    let companionsElements = props.dialogsPage.companionsData.map(companion =>
+        <Companions id={companion.id}
+                    name={companion.name}
+                    src={companion.src}
+                    key={companion.id}/>)
+    let messagesElements = props.dialogsPage.messagesData.map(message =>
+        <Message id={message.id}
+                 text={message.text}
+                 key={message.id}/>)
     let onSendMessageClick = () => {
         props.sendMessage()
     }
