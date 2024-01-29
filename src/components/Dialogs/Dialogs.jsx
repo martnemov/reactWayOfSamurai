@@ -20,18 +20,19 @@ const Dialogs = (props) => {
         <Companions id={companion.id}
                     name={companion.name}
                     src={companion.src}
-                    key={companion.id}/>)
+                    key={companion.id}/>);
     let messagesElements = props.dialogsPage.messagesData.map(message =>
         <Message id={message.id}
                  text={message.text}
-                 key={message.id}/>)
+                 key={message.id}/>);
     let onSendMessageClick = () => {
         props.sendMessage()
-    }
+    };
     let onChangeMessageBody = (e) => {
         let body = e.target.value;
         props.changeMessage(body)
-    }
+    };
+
     return (<div className={style.dialogs}>
         <div className={style.companions}>
             {companionsElements}
