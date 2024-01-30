@@ -1,6 +1,6 @@
 const SUBSCRIBE = 'SUBSCRIBE';
 const UNSUBSCRIBE = 'UNSUBSCRIBE';
-const SET_USERS = 'SETUSERS';
+const SET_USERS = 'SET_USERS';
 
 let initialState = {
     users: []
